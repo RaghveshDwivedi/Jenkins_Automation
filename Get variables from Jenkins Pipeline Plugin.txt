@@ -1,0 +1,15 @@
+node (node_name) {    
+   stage("preserve build user") {
+     wrap([$class: 'BuildUser']) {
+      GET_BUILD_USER_FIRST_NAME = sh ( script: 'echo "${BUILD_USER_FIRST_NAME}"', returnStdout: true).trim()
+      GET_BUILD_USER_EMAIL = sh ( script: 'echo "${BUILD_USER_EMAIL}"', returnStdout: true).trim()
+      GET_BUILD_USER_LAST_NAME = sh ( script: 'echo "${BUILD_USER_LAST_NAME}"', returnStdout: true).trim()
+      GET_BUILD_USER = sh ( script: 'echo "${BUILD_USER}"', returnStdout: true).trim()
+      }
+     }
+     
+        println "GET_BUILD_USER_FIRST_NAME: ${GET_BUILD_USER_FIRST_NAME}"
+        println "GET_BUILD_USER_EMAIL: ${GET_BUILD_USER_EMAIL}" 
+        println "GET_BUILD_USER_LAST_NAME: ${GET_BUILD_USER_LAST_NAME}" 
+        println "GET_BUILD_USER: ${GET_BUILD_USER}"
+}
