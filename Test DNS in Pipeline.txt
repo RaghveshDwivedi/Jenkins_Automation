@@ -1,0 +1,15 @@
+def slave='slave'
+node (slave) {
+  def DNS_NAME='<<DNS_NAME>>'
+  stage('Check DNS') {
+    DNS=sh returnStdout: true, script: """ nslookup $DNS_NAME | grep Name | cut -d ':' -f2 | sed -e 's/^[[:space:]]*//' | tr -d '\n' """.trim() 
+   }
+  stage ('Check value') {
+    if( "$DNS" == "$DNS_NAME" ) {
+      sh "exit 16"
+    }
+  }
+  stage ('Check next stage') {
+    print 'Next Stage'
+  }
+}
